@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  m3e-base-api:
+    image: m3e-base-api:latest  # 使用你之前构建的镜像名称
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "${PORT:-6000}:6000"  # 将宿主机的端口映射到容器的6000端口
+    environment:
+      PORT: "${PORT:-6000}"  # Flask服务的端口，如果没有指定，默认是6000
+      DEVICE: "${DEVICE:-cpu}"  # 使用的设备，如果没有指定，默认是cpu，可选cuda
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
