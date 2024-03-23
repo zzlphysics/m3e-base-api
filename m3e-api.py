@@ -7,7 +7,7 @@ PORT = int(os.environ.get("PORT", 6000))
 DEVICE = os.environ.get("DEVICE", "cpu").lower()
 
 # 如果设备设定为'gpu'，则使用'cuda'，否则使用'cpu'
-DEVICE = "cuda" if DEVICE == "gpu" else "cpu"
+# DEVICE = "cuda" if DEVICE == "gpu" or DEVICE == "cuda" else "cpu"
 
 m3e = SentenceTransformer('moka-ai/m3e-base', device=DEVICE)
 
